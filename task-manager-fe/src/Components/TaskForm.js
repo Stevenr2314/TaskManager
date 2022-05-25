@@ -11,10 +11,11 @@ const TaskForm = () => {
     const [form, setForm] = useState(initialForm)
 
     const handleChange = event => {
-        setForm({...initialForm, [event.target.name]: event.target.value})
+        setForm({...form, [event.target.name]: event.target.value})
     }
 
     const handleSubmit = event => {
+        event.preventDefault()
         axios.post('http://localhost:5001/tasks', form)
             .then(res => {
                 console.log(res)

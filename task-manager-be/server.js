@@ -20,3 +20,7 @@ server.listen(5001, () =>
 server.get('/tasks', (req, res) => {
     return  res.json(dummyData)
 })
+
+server.post('/tasks', (req, res) => {
+  console.log(req.body)
+})

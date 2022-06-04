@@ -6,18 +6,11 @@
 module.exports = {
 
   development: {
-    client: 'postgresql',
-    connection: {
-      database: 'task_manager',
-      user:     'postgres',
-      password: 'Paperz421'
-    },
+    client: 'pg',
+    connection: 'postgresql://postgres:Paperz421@localhost:5433/task_manager',
     pool: {
       min: 2,
       max: 10
-    },
-    migrations: {
-      tableName: 'knex_task_migrations'
     }
   },
 };

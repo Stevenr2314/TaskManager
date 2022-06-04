@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 const dummyData = require('./dummyData')
+const Tasks = require('./Model/task_model')
 
 const server = express()
 server.use(helmet())
@@ -18,7 +19,9 @@ server.listen(5001, () =>
 )
 
 server.get('/tasks', (req, res) => {
-    return  res.json(dummyData)
+    Tasks.getAll()
+      .then(tasks => res.json(tasks))
+      .catch(err => console.log(err))
 })
 
 server.post('/tasks', (req, res) => {

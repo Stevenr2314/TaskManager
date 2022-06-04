@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import TaskForm from "./TaskForm";
 
 const Task = () => {
     const [tasks, setTasks] = useState()
+    const [taskChange, setTaskChange] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:5001/tasks')
             .then(res => {
                 setTasks(res.data)
+                setTaskChange(false)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [taskChange])
     return(
         <>
           {
@@ -25,6 +28,7 @@ const Task = () => {
               :
               <div> Loading</div>
           }
+          <TaskForm setTaskChange={setTaskChange} />
         </>
     )
 }

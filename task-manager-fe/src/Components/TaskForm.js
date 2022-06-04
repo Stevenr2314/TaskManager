@@ -7,7 +7,7 @@ const initialForm = {
     description: '',
     
 }
-const TaskForm = () => {
+const TaskForm = props => {
     const [form, setForm] = useState(initialForm)
 
     const handleChange = event => {
@@ -18,7 +18,7 @@ const TaskForm = () => {
         event.preventDefault()
         axios.post('http://localhost:5001/tasks', form)
             .then(res => {
-                console.log(res)
+                props.setTaskChange(true)
             })
             .catch(err => console.log(err))
     }

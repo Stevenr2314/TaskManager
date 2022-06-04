@@ -25,5 +25,7 @@ server.get('/tasks', (req, res) => {
 })
 
 server.post('/tasks', (req, res) => {
-  console.log(req.body)
+    Tasks.addTask(req.body)
+        .then(task => res.status(201).json(task))
+        .catch(err => console.log(err))
 })

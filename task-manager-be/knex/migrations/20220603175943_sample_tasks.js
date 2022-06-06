@@ -8,6 +8,7 @@ exports.up = function(knex) {
     table.string('title').notNullable()
     table.string('description')
     table.string('dueDate')
+    table.boolean('completed').defaultTo(false)
   })
 };
 

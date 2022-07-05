@@ -14,6 +14,12 @@ const Task = () => {
             })
             .catch(err => console.log(err))
     }, [taskChange])
+
+    const handleDelete = title => {
+        axios.delete('http://localhost:5001/tasks', {data: {title}})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+    }
     return(
         <>
           {
@@ -23,6 +29,7 @@ const Task = () => {
                     <h2>{task.title}</h2>
                     <p>{task.description}</p>
                     <p>{task.dueDate}</p>
+                    <button onClick={() => handleDelete(task.title)}>Delete</button>
                   </div>
               )})
               :

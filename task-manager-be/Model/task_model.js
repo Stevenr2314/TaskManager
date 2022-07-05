@@ -9,7 +9,13 @@ function addTask(task) {
         .then(resp => console.log(resp))
 }
 
+function deleteTask(task) {
+    return db('tasks').where('title', task.title).first().del()
+        .then(resp => console.log(resp))
+}
+
 module.exports = {
     getAll,
-    addTask
+    addTask,
+    deleteTask
 }

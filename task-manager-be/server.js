@@ -29,3 +29,9 @@ server.post('/tasks', (req, res) => {
         .then(task => res.status(201).json(task))
         .catch(err => console.log(err))
 })
+
+server.delete('/tasks', (req, res) => {
+    Tasks.deleteTask(req.body)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
+})

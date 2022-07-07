@@ -16,11 +16,16 @@ const TaskForm = props => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('http://localhost:5001/tasks', form)
-            .then(res => {
-                props.setTaskChange(true)
-            })
-            .catch(err => console.log(err))
+        if(props.formType === 'create'){
+            axios.post('http://localhost:5001/tasks', form)
+                .then(res => {
+                    props.setTaskChange(true)
+                })
+                .catch(err => console.log(err))
+        } else{
+            axios.put()
+        }
+        
     }
     return(
         <form onSubmit={handleSubmit}>
@@ -33,7 +38,7 @@ const TaskForm = props => {
             <label>Description:</label>
             <input name='description' type="text" value={form.description} onChange={handleChange} />
             <br />
-            <button type='submit' value='Submit'/>
+            <button type='submit' value='Submit'>Submit</button>
         </form>
     )
 }

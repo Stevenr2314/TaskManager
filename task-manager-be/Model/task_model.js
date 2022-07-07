@@ -9,8 +9,13 @@ function addTask(task) {
         .then(resp => console.log(resp))
 }
 
+function updateTask(id, data) {
+    return db('tasks').where('id', id).first()
+        .update()
+}
+
 function deleteTask(task) {
-    return db('tasks').where('title', task.title).first().del()
+    return db('tasks').where('id', task.id).first().del()
         .then(resp => console.log(resp))
 }
 

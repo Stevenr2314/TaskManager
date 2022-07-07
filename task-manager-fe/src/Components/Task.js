@@ -5,20 +5,26 @@ import TaskForm from "./TaskForm";
 const Task = () => {
     const [tasks, setTasks] = useState()
     const [taskChange, setTaskChange] = useState(false)
+    const updateForm = {}
 
     useEffect(() => {
         axios.get('http://localhost:5001/tasks')
             .then(res => {
                 setTasks(res.data)
-                setTaskChange(false)
+                setTaskChange(!taskChange)
             })
             .catch(err => console.log(err))
     }, [taskChange])
 
-    const handleDelete = title => {
-        axios.delete('http://localhost:5001/tasks', {data: {title}})
-            .then(resp => console.log(resp))
+    const handleDelete = id => {
+        axios.delete('http://localhost:5001/tasks', {data: {id}})
+            .then(resp => {
+                setTaskChange(true)})
             .catch(err => console.log(err))
+    }
+
+    const handleUpdate = (id, updateForm) => {
+        console.log(id)
     }
     return(
         <>
@@ -29,7 +35,8 @@ const Task = () => {
                     <h2>{task.title}</h2>
                     <p>{task.description}</p>
                     <p>{task.dueDate}</p>
-                    <button onClick={() => handleDelete(task.title)}>Delete</button>
+                    <button onClick={() => handleDelete(task.id)}>Delete</button>
+                    <button onClick={() => handleUpdate(task.id, updateForm)}>Update</button>
                   </div>
               )})
               :

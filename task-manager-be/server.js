@@ -32,6 +32,6 @@ server.post('/tasks', (req, res) => {
 
 server.delete('/tasks', (req, res) => {
     Tasks.deleteTask(req.body)
-        .then(resp => console.log(resp))
+        .then(resp => res.status(200).json({message: 'DELETE Successful'}))
         .catch(err => console.log(err))
 })

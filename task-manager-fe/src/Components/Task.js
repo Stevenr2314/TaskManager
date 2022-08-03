@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import TaskForm from "./TaskForm";
+import TaskUpdateForm from "./TaskUpdateForm";
+import {Modal, ModalContentsBase, ModalContents, ModalDismissButton, ModalOpenButton} from '../Tools/Modal'
 
 const Task = () => {
     const [tasks, setTasks] = useState()
     const [taskChange, setTaskChange] = useState(false)
-    const updateForm = {}
 
     useEffect(() => {
         axios.get('http://localhost:5001/tasks')
             .then(res => {
-                setTasks(res.data)
+                
+                setTasks(res.data.sort(({id:a},{id:b}) => b-a))
                 setTaskChange(!taskChange)
             })
             .catch(err => console.log(err))
@@ -23,9 +25,6 @@ const Task = () => {
             .catch(err => console.log(err))
     }
 
-    const handleUpdate = (id, updateForm) => {
-        console.log(id)
-    }
     return(
         <>
           {
@@ -36,13 +35,21 @@ const Task = () => {
                     <p>{task.description}</p>
                     <p>{task.dueDate}</p>
                     <button onClick={() => handleDelete(task.id)}>Delete</button>
-                    <button onClick={() => handleUpdate(task.id, updateForm)}>Update</button>
+                    <Modal>
+                        <ModalOpenButton>
+                         <button>Update</button>   
+                        </ModalOpenButton>
+                        <ModalContents title='Update Task'>
+                            <TaskUpdateForm setTaskChange={setTaskChange} task={task}/>
+                        </ModalContents>
+                    </Modal>
                   </div>
               )})
               :
               <div> Loading</div>
           }
-          <TaskForm setTaskChange={setTaskChange} />
+          <br />
+          <TaskForm setTaskChange={setTaskChange}/>
         </>
     )
 }

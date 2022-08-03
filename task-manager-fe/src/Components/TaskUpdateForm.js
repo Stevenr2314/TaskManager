@@ -1,29 +1,25 @@
 import axios from "axios";
 import React, {useState} from "react";
+import {ModalDismissAsyncButton} from '../Tools/Modal'
 
-const initialForm = {
-    title: '',
-    dueDate: '',
-    description: '',
-    
-}
-const TaskForm = props => {
-    const [form, setForm] = useState(initialForm)
+const TaskUpdateForm = props => {
+    const [form, setForm] = useState(props.task)
 
     const handleChange = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = event => {
-        event.preventDefault()
-        axios.post('http://localhost:5001/tasks', form)
+    const handleSubmit = () => {
+        return axios.patch('http://localhost:5001/tasks', {data: {form}})
             .then(res => {
                 props.setTaskChange(true)
+                return res.data.message
             })
             .catch(err => console.log(err))
+        
     }
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={e => e.preventDefault()}>
             <label>Title: </label>
             <input name='title' type="text" value={form.title} onChange={handleChange} />
             <br />
@@ -33,9 +29,11 @@ const TaskForm = props => {
             <label>Description:</label>
             <input name='description' type="text" value={form.description} onChange={handleChange} />
             <br />
-            <button type='submit' value='Submit'>Submit</button>
+            <ModalDismissAsyncButton>
+                <button onClick={handleSubmit}>Submit</button>
+            </ModalDismissAsyncButton>
         </form>
     )
 }
 
-export default TaskForm
+export default TaskUpdateForm

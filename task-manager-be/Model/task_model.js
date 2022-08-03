@@ -9,9 +9,11 @@ function addTask(task) {
         .then(resp => console.log(resp))
 }
 
-function updateTask(id, data) {
-    return db('tasks').where('id', id).first()
-        .update()
+function updateTask({form}) {
+    return db('tasks').where('id', form.id).first()
+        .update(form)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
 }
 
 function deleteTask(task) {
@@ -22,5 +24,6 @@ function deleteTask(task) {
 module.exports = {
     getAll,
     addTask,
-    deleteTask
+    deleteTask,
+    updateTask
 }

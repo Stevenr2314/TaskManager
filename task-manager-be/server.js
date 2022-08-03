@@ -32,6 +32,13 @@ server.post('/tasks', (req, res) => {
 
 server.delete('/tasks', (req, res) => {
     Tasks.deleteTask(req.body)
-        .then(resp => res.status(200).json({message: 'DELETE Successful'}))
+        .then(resp => res.status(200).json({message: 'success'}))
         .catch(err => console.log(err))
+})
+
+server.patch('/tasks', (req, res) => {
+  console.log(req.body.data)
+  Tasks.updateTask(req.body.data)
+    .then(resp => res.status(200).json({message: 'success'}))
+    .catch(err => console.log(err))
 })

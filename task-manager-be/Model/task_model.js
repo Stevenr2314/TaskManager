@@ -21,9 +21,18 @@ function deleteTask(task) {
         .then(resp => console.log(resp))
 }
 
+function toggleCompleted(id) {
+    return db('tasks').where('id', id).first()
+        .then(resp => {
+            const current = resp.completed
+            return db('tasks').where('id', id).first().update({completed: !current})
+        })
+}
+
 module.exports = {
     getAll,
     addTask,
     deleteTask,
-    updateTask
+    updateTask,
+    toggleCompleted
 }

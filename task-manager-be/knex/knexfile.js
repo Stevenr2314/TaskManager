@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -11,6 +9,9 @@ module.exports = {
     pool: {
       min: 2,
       max: 10
+    },
+    migrations: {
+      directory: './migrations'
     },
     seeds: {
       directory: './seeds'

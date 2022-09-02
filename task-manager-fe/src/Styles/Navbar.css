@@ -1,0 +1,45 @@
+#navbarContainerOpen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:20%;
+    
+}
+
+.linksContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px dashed green
+}
+
+.navbarToggle {
+    height: 15%;
+    font-size: 4rem;
+    cursor: pointer;
+    border: 1px dashed red;
+}
+
+#navbarContainerOpen .linksContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#navbarContainerOpen .links {
+    width: 100%;
+    padding: 2rem 3rem;
+}
+
+#navbarContainerClosed {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width:10%;
+}
+
+
+

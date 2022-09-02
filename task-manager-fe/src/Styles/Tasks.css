@@ -1,0 +1,33 @@
+.tasksContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed purple;
+    width: 100%;
+}
+
+.taskWrapper {
+    border: 1px dashed green;
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed gray;
+    width: 90%;
+    padding:1.5rem 0;
+}
+
+h3 {
+    font-size: 4rem;
+}
+
+p {
+    font-size: 2rem;
+}

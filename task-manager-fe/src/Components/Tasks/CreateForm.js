@@ -3,11 +3,11 @@ import React, {useState} from "react";
 
 const initialForm = {
     title: '',
-    dueDate: '',
     description: '',
+    dueDate: '',
     
 }
-const TaskForm = props => {
+const CreateTaskForm = props => {
     const [form, setForm] = useState(initialForm)
 
     const handleChange = event => {
@@ -27,15 +27,15 @@ const TaskForm = props => {
             <label>Title: </label>
             <input name='title' type="text" value={form.title} onChange={handleChange} />
             <br />
-            <label>Due Date: </label>
-            <input name='dueDate' type="text" value={form.dueDate} onChange={handleChange} />
-            <br />
             <label>Description:</label>
             <input name='description' type="text" value={form.description} onChange={handleChange} />
+            <br />
+            <label>Due Date: </label>
+            <input name='dueDate' type="text" value={form.dueDate} onChange={handleChange} />
             <br />
             <button type='submit' value='Submit'>Submit</button>
         </form>
     )
 }
 
-export default TaskForm
+export default CreateTaskForm

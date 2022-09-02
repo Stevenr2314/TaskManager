@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import { UserContext } from "../../App";
 import useInput from '../../Tools/useInput'
 
 const LoginForm = () => {
     const username = useInput('')
     const password = useInput('')
-    
+    const {setUser} = useContext(UserContext)
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -14,7 +15,7 @@ const LoginForm = () => {
             password: password.value
         }
         axios.post('http://localhost:5001/users/login', {data:{form}})
-            .then(res => console.log(res))
+            .then(res => setUser(res.data.user))
             .catch(err => console.log(err))
     }
 
@@ -28,7 +29,7 @@ const LoginForm = () => {
                 <input type='password' name="password" placeholder="password" {...password}/>
             </label>
             <br />
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
         </form>
     )
 }

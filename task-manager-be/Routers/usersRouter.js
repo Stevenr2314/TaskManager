@@ -1,4 +1,5 @@
 const express = require('express')
+const { checkLogin } = require('../Middleware/Users/checkLogin')
 const router = express.Router()
 const Users = require('../Model/users_model')
 
@@ -20,9 +21,8 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.post('/login', (req,res) => { //TODO: Create LOGIN check Middleware
-    console.log(req.body.data.form)
-    res.status(200).json({message: 'success'})
+router.post('/login', checkLogin, (req,res) => {
+    res.status(200).json({message: 'Login successful', user: res.locals.user})
 })
 router.delete('/', (req, res) => {
     Users.deleteUser(req.body)

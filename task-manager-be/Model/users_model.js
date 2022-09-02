@@ -4,8 +4,9 @@ function getAll() {
     return db('users')
 }
 
-function getById (id) {
-    return db('users').where('id', id).first()
+function getBy (string, value) {
+    return db('users').where(`${string}`, value).first()
+        .then(user => user )
 }
 
 function addUser(user) {
@@ -27,7 +28,7 @@ function deleteUser(user) {
 
 module.exports = {
     getAll,
-    getById,
+    getBy,
     addUser,
     deleteUser,
     updateUser

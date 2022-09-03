@@ -1,12 +1,11 @@
 const db = require('../knex/db')
 
-function getAll() {
-    return db('projects')
+function getAllFromUserID(id) {
+    return db('projects').where('user_id', id)
 }
 
 function addProject(project) {
     return db('projects').insert(project)
-        .then(resp => console.log(resp))
 }
 
 function updateProject({form}) {
@@ -22,7 +21,7 @@ function deleteProject(project) {
 }
 
 module.exports = {
-    getAll,
+    getAllFromUserID,
     addProject,
     deleteProject,
     updateProject

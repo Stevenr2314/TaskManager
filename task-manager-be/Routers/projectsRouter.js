@@ -3,14 +3,17 @@ const router = express.Router()
 const Projects = require('../Model/projects_model')
 
 router.get('/', (req, res) => {
-    Projects.getAll()
-      .then(projects => res.json(projects))
+    console.log(`USERID: ${req.query.id}`)
+    Projects.getAllFromUserID(req.query.id)
+      .then(projects => {
+        console.log(projects)
+        res.json(projects) })
       .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
     Projects.addProject(req.body)
-        .then(projects => res.status(201).json(projects))
+        .then(resp => res.status(201).json({message:'success'}))
         .catch(err => console.log(err))
 })
 

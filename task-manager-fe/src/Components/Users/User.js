@@ -3,8 +3,7 @@ import { UserContext } from "../../App";
 import LoginForm from './LoginForm';
 
 const User = () => {
-    const {user, setUser} = useContext(UserContext)
-    console.log(user)
+    const {user} = useContext(UserContext)
 
     return (
         <div>
@@ -12,7 +11,7 @@ const User = () => {
                 user.username ? 
 
                 <div>
-                    User Found
+                    {user.username} is logged in
                 </div>
                 :
 

@@ -15,8 +15,8 @@ function updateProject({form}) {
         .catch(err => console.log(err))
 }
 
-function deleteProject(project) {
-    return db('projects').where('id', project.id).first().del()
+function deleteProject(id) {
+    return db('projects').where('id', id).first().del()
         .then(resp => console.log(resp))
 }
 

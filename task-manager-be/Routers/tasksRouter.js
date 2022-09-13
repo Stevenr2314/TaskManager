@@ -2,10 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Tasks = require('../Model/task_model')
 
-router.get('/', (req, res) => {
-    Tasks.getAll()
-      .then(tasks => res.json(tasks))
-      .catch(err => console.log(err))
+router.get('/:id', (req, res) => {
+    Tasks.getByProjectId(req.params.id)
+        .then(tasks => res.json(tasks))
 })
 
 router.post('/', (req, res) => {
@@ -21,14 +20,13 @@ router.delete('/', (req, res) => {
 })
 
 router.patch('/', (req, res) => {
-  console.log(req.body.data)
   Tasks.updateTask(req.body.data)
     .then(resp => res.status(200).json({message: 'success'}))
     .catch(err => console.log(err))
 })
 
-router.put('/', (req, res) => {
-    Tasks.toggleCompleted(req.body.data.id)
+router.put('/:id', (req, res) => {
+    Tasks.toggleCompleted(req.params.id)
     .then(resp => res.status(200).json({message: 'success'}))
     .catch(err => console.log(err))
 })

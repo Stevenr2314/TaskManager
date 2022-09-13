@@ -4,6 +4,10 @@ function getAll() {
     return db('tasks')
 }
 
+function getByProjectId(id) {
+    return db('tasks').where('project_id', id)
+}
+
 function addTask(task) {
     return db('tasks').insert(task)
         .then(resp => console.log(resp))
@@ -31,6 +35,7 @@ function toggleCompleted(id) {
 
 module.exports = {
     getAll,
+    getByProjectId,
     addTask,
     deleteTask,
     updateTask,

@@ -3,7 +3,6 @@ const router = express.Router()
 const Projects = require('../Model/projects_model')
 
 router.get('/', (req, res) => {
-    console.log(`USERID: ${req.query.id}`)
     Projects.getAllFromUserID(req.query.id)
       .then(projects => {
         console.log(projects)
@@ -17,14 +16,13 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.delete('/', (req, res) => {
-    Projects.deleteProject(req.body)
+router.delete('/:id', (req, res) => {
+    Projects.deleteProject(req.params.id)
         .then(resp => res.status(200).json({message: 'success'}))
         .catch(err => console.log(err))
 })
 
 router.patch('/', (req, res) => {
-  console.log(req.body.data)
   Projects.updateProject(req.body.data)
     .then(resp => res.status(200).json({message: 'success'}))
     .catch(err => console.log(err))

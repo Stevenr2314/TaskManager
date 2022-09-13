@@ -15,7 +15,9 @@ const LoginForm = () => {
             password: password.value
         }
         axios.post('http://localhost:5001/users/login', {data:{form}})
-            .then(res => setUser(res.data.user))
+            .then(res => {
+                setUser(res.data.user)
+                localStorage.setItem('user', JSON.stringify(res.data.user))})
             .catch(err => console.log(err))
     }
 

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { UserContext } from "../../App";
 import LoginForm from './LoginForm';
 
@@ -8,13 +8,11 @@ const User = () => {
     return (
         <div>
             {
-                user.username ? 
-
+                user.username !== undefined ? 
                 <div>
                     {user.username} is logged in
                 </div>
                 :
-
                 <LoginForm />
             }
             

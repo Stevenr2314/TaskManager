@@ -1,4 +1,5 @@
 .tasksContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,15 +20,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px dashed gray;
     width: 90%;
     padding:1.5rem 0;
-}
-
-h3 {
-    font-size: 4rem;
-}
-
-p {
-    font-size: 2rem;
 }

@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, {useState} from "react";
 
-const initialForm = {
-    title: '',
-    description: '',
-    dueDate: '',
-    
-}
+
 const CreateTaskForm = props => {
+    const initialForm = {
+        title: '',
+        description: '',
+        dueDate: '',
+        project_id: props.projectId
+        
+    }
     const [form, setForm] = useState(initialForm)
 
     const handleChange = event => {
@@ -16,7 +18,7 @@ const CreateTaskForm = props => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('http://localhost:5001/tasks', form)
+        axios.post(`http://localhost:5001/tasks`, form)
             .then(res => {
                 props.setTaskChange(true)
             })

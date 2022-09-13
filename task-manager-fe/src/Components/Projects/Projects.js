@@ -2,6 +2,8 @@ import axios from "axios";
 import React, {useContext, useEffect, useState} from "react";
 import { UserContext } from "../../App";
 import CreateProjectButton from "./CreateProjectButton";
+import Project from "./Project";
+import '../../Styles/Projects.css'
 
 
 const Projects = () => {
@@ -10,12 +12,12 @@ const Projects = () => {
     const {user} = useContext(UserContext)
 
     useEffect(() => {
+        console.log('Before user id check in Projects')
         if(user.id){
-            console.log('fetching info')
             axios.get(`http://localhost:5001/projects/?id=${user.id}`)
                 .then(res => {
                     setProjects(res.data)
-                    console.log(projects)})
+                    setProjectsChange(false)})
                 .catch(err => console.log(err))  
         }
         
@@ -23,14 +25,18 @@ const Projects = () => {
 
     const checkProjects = (projects) => {
         if(projects.length > 0) {
-            return projects.map(project => {
-                return(
-                    <div key={project.name}>{project.name}</div>
-                )
-            })
+            return (
+                <ul className="projects">
+                    {projects.map(project => {
+                    return(
+                        <Project key={project.id} project={project} setProjectsChange={setProjectsChange}/>
+                    )})}
+                </ul>
+                
+            )
         } else {
             return(
-                <div>
+                <div className="noProjects">
                     <h2>You have no Projects yet, click the button below to create a new project.</h2>
                     <CreateProjectButton setProjectsChange={setProjectsChange}/>
                 </div>
@@ -39,8 +45,9 @@ const Projects = () => {
     }
 
     return (
-        <div>
-            Projects:
+        <div className="projects--container">
+            <h1>Projects</h1>
+            <CreateProjectButton setProjectsChange={setProjectsChange}/>
             {
                 projects ?
                 checkProjects(projects)
@@ -48,7 +55,6 @@ const Projects = () => {
                 :
                 <h2>Loading...</h2>
             }
-            <CreateProjectButton setProjectsChange={setProjectsChange}/>
         </div>
     )
 }

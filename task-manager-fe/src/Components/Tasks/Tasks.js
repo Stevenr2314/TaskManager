@@ -10,45 +10,39 @@ const Tasks = props => {
     const [taskChange, setTaskChange] = useState(false)
 
     useEffect(() => {
-        if (props.daily) {
-            setTasks()
-        }
-        axios.get('http://localhost:5001/tasks')
+        axios.get(`http://localhost:5001/tasks/${props.projectId}`)
             .then(res => {
-                
                 setTasks(res.data.sort(({id:a},{id:b}) => b-a))
-                setTaskChange(!taskChange)
+                setTaskChange(false)
             })
             .catch(err => console.log(err))
     }, [taskChange])
 
     const handleCheckbox = id => {
-        console.log('handlingCheckbox')
-        axios.put('http://localhost:5001/tasks', {data: {id}})
+        axios.put(`http://localhost:5001/tasks/${id}`)
             .then(res => {
-                console.log(res)})
+                setTaskChange(true)})
             .catch(err => console.log(err))
     }
 
     return(
-        <div className="tasksContainer">
+        <ul className="tasksContainer">
           {
-              tasks ?
+              tasks.length > 0 ?
               tasks.map((task, index) => {
-                if(!task.completed)
+                if(task.completed === true) return null
                 return ( 
                   <div key={index} className='taskWrapper'>
                     <Checkbox onClick={() => handleCheckbox(task.id)}/>
-                    <Task task={task} setTaskChange={setTaskChange}/>
+                    <Task task={task} setTaskChange={setTaskChange} projectId={props.projectId}/>
                   </div>
-                )
-                return null})
+                )})
               :
-              <div> Loading</div>
+              <div> No tasks yet</div>
           }
           <br />
-          <CreateTaskForm setTaskChange={setTaskChange}/>
-        </div>
+          <CreateTaskForm setTaskChange={setTaskChange} projectId={props.projectId}/>
+        </ul>
     )
 }
 export default Tasks

@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../App";
+import Projects from "../Components/Projects/Projects";
+import LocalTasks from "../Components/Tasks/LocalTasks/LocalTasks";
 import Tasks from "../Components/Tasks/Tasks";
 import '../Styles/Home.css'
 
 const Home = props => {
-
-    // useEffect(() => {
-    //     localStorage
-    // })
+    const {user} = useContext(UserContext)
     return (
         <div className="home">
-            <h1> Welcome User</h1>
-            <section className='content'>
-                Projects and Tasks
-                <Tasks />
-            </section>
+            <h1> Task Manager</h1>
+            {
+                user && user.username !== undefined ? 
+                <section className='content'>
+                    <Tasks userId={user.id}/>
+                    <Projects />
+                </section>
+                :
+                <section className='content'>
+                    <LocalTasks />
+                </section>
+            }
+            
         </div>
     )
 }

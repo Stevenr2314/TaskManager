@@ -4,22 +4,88 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px dashed purple;
+    border-radius: 10px;
+    background-color: #5F6F94;
+    padding: 1.5rem 0;
     width: 100%;
 }
 
-.taskWrapper {
-    border: 1px dashed green;
-    width: 90%;
-    display: flex;
-    align-items: center;
+.tasksContainer button{
+    cursor: pointer;
+    background-color: #97D2EC;
+    padding: 1.5rem 1.5rem;
+    font-size: 1.5rem;
+    border: 1px solid #25316D;
+    border-radius: 5px;
+    color: whitesmoke;
+    margin: 3px 3px;
+    text-shadow: 1px 1px 2px #000000;
 }
 
-.task {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    padding:1.5rem 0;
+/* ~~~~~~~~~~~~~CREATE TASK FORM~~~~~~~~~~~~~~~ */
+
+.Task--form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 70%;
+    margin-top: 10px;
+    justify-items: end;
 }
+
+.Task--form button {
+    width:100%;
+    grid-column: 2;
+    margin: 0;
+}
+
+.Task--form label{
+    font-size: 2rem;
+}
+
+.Task--form input, .Task--form textarea{
+    padding: .5rem 1rem;
+    margin: .5rem 0;
+    grid-column: span 2;
+    width: 100%;
+}
+
+/* ~~~~~~~~~~~~~~~~~INDIVIDUAL TASK~~~~~~~~~~~~~~ */
+
+.task--wrapper {
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 1rem 1.5rem;
+    margin-bottom: .5rem;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task--info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    width: 70%;
+}
+
+.task--info h3 {
+    font-size: 3rem;
+}
+
+.task--info p{
+    overflow-y: auto;
+    width: 95%;
+    height: 95%;
+    grid-row: span 2;
+}
+
+.noTasks {
+    background-color: whitesmoke;
+    font-size: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    padding: 1rem;
+}
+

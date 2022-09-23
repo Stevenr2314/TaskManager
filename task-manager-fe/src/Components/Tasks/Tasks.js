@@ -1,29 +1,23 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
-import CreateTaskForm from "./CreateForm"
+import CreateTaskForm from "./CreateTaskForm"
 import Task from './Task'
-import Checkbox from "./Checkbox"
 import '../../Styles/Tasks.css'
+import { useLocation } from "react-router-dom"
 
 const Tasks = props => {
     const [tasks, setTasks] = useState([])
     const [taskChange, setTaskChange] = useState(false)
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/tasks/${props.projectId}`)
+        const taskPath = props.userId ? `user_id/${props.userId}` : `project_id/${props.projectId}`
+        axios.get(`http://localhost:5001/tasks/${taskPath}`)
             .then(res => {
                 setTasks(res.data.sort(({id:a},{id:b}) => b-a))
                 setTaskChange(false)
             })
             .catch(err => console.log(err))
     }, [taskChange])
-
-    const handleCheckbox = id => {
-        axios.put(`http://localhost:5001/tasks/${id}`)
-            .then(res => {
-                setTaskChange(true)})
-            .catch(err => console.log(err))
-    }
 
     return(
         <ul className="tasksContainer">
@@ -32,16 +26,18 @@ const Tasks = props => {
               tasks.map((task, index) => {
                 if(task.completed === true) return null
                 return ( 
-                  <div key={index} className='taskWrapper'>
-                    <Checkbox onClick={() => handleCheckbox(task.id)}/>
-                    <Task task={task} setTaskChange={setTaskChange} projectId={props.projectId}/>
-                  </div>
+                    <Task key={index} task={task} setTaskChange={setTaskChange}/>
                 )})
               :
-              <div> No tasks yet</div>
+              <div className="noTasks"> No tasks yet</div>
           }
-          <br />
-          <CreateTaskForm setTaskChange={setTaskChange} projectId={props.projectId}/>
+          {
+              props.userId ?
+              <CreateTaskForm setTaskChange={setTaskChange} userId={props.userId}/>
+              :
+              <CreateTaskForm setTaskChange={setTaskChange} projectId={props.projectId}/>
+          }
+          
         </ul>
     )
 }

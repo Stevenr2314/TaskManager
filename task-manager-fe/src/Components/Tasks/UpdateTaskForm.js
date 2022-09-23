@@ -2,7 +2,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import {ModalDismissAsyncButton} from '../../Tools/Modal'
 
-const TaskUpdateForm = props => {
+const UpdateTaskForm = props => {
     const [form, setForm] = useState(props.task)
 
     const handleChange = event => {
@@ -19,16 +19,13 @@ const TaskUpdateForm = props => {
         
     }
     return(
-        <form onSubmit={e => e.preventDefault()}>
+        <form className="Task--form" onSubmit={e => e.preventDefault()}>
             <label htmlFor="title">Title: </label>
             <input name='title' type="text" value={form.title} onChange={handleChange} />
-            <br />
             <label htmlFor="dueDate">Due Date: </label>
             <input name='dueDate' type="text" value={form.dueDate} onChange={handleChange} />
-            <br />
             <label htmlFor="description">Description:</label>
-            <input name='description' type="text" value={form.description} onChange={handleChange} />
-            <br />
+            <textarea rows='5' name='description' type="text" value={form.description} onChange={handleChange} />
             <ModalDismissAsyncButton>
                 <button onClick={handleSubmit}>Submit</button>
             </ModalDismissAsyncButton>
@@ -36,4 +33,4 @@ const TaskUpdateForm = props => {
     )
 }
 
-export default TaskUpdateForm
+export default UpdateTaskForm

@@ -1,4 +1,5 @@
 import * as React from "react"
+import '../Styles/Modal.css'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 // callAll takes functions as arguments, then returns another function, which then takes in any number of arguments and calls each function in the original list of functions with those argument
@@ -38,54 +39,27 @@ function ModalOpenButton({ children: child }) {
   })
 }
 //Same as Close button
-const modalBaseStyle = {
-    border: '1px dashed gray',
-    position: 'fixed',
-    zIndex: 10,
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,.4)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-}
 function ModalContentsBase(props) {
   const [isOpen, setIsOpen] = React.useContext(ModalContext)
   const clickHandler = event => {
-      if(event.target.className === 'modalBase') {
+      if(event.target.className === 'modal--base') {
           setIsOpen(false)
       }
     }
   if(!isOpen) return null
 
   return (
-      <div className='modalBase' onClick={e => clickHandler(e)} {...props} style={modalBaseStyle}>
+      <div className='modal--base' onClick={e => clickHandler(e)} {...props}>
           {props.children}
       </div>
   )
 }
 
-const modalContentStyle = {
-    backgroundColor: 'white',
-    borderRadius: '5px',
-    padding: '20px',
-    zIndex: '11',
-    width: '35%',
-    height: '40%',
-    overflow: 'auto'
-}
 function ModalContents({ title, children, ...props }) {
   return (
     <ModalContentsBase {...props}>
-      <div style={modalContentStyle}>
-        <div css={{ display: "flex", justifyContent: "flex-end" }}>
-          <ModalDismissButton>
-            <button>Close</button>
-          </ModalDismissButton>
-        </div>
-        <h1>{title}</h1>
+      <div className="modal--contents">
+        <h3 style={{fontSize: '3rem'}}>{title}</h3>
         {children}
       </div>
     </ModalContentsBase>

@@ -1,15 +1,15 @@
 import React from "react";
 import { Modal, ModalContents, ModalDismissButton, ModalOpenButton } from "../../Tools/Modal";
-import CreateProjectForm from "./CreateForm";
+import CreateProjectForm from "./CreateProjectForm";
 
 
 const CreateProjectButton = props =>{
     return(
         <Modal>
             <ModalOpenButton>
-                <span>Create Project</span>
+                <button className="createProject--button">Create Project</button>
             </ModalOpenButton>
-            <ModalContents>
+            <ModalContents title='Create Project'>
                 <CreateProjectForm setProjectsChange={props.setProjectsChange}/>
                 <ModalDismissButton><button>Cancel</button></ModalDismissButton>
             </ModalContents>

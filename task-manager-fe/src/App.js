@@ -10,10 +10,9 @@ export const UserContext = createContext(null)
 function App() {
   const [user, setUser] = useState({}) 
   useEffect(() => {
-    
+
     if(localStorage.getItem('user')){
       setUser(JSON.parse(localStorage.getItem('user')))
-      console.log(user)
     }
   }, [])
   return (

@@ -1,6 +1,25 @@
 .projects--container{
-    width: 100%;
+    width: 97%;
     height: auto;
+    text-align: center;
+}
+
+.projects--container button{
+    background-color: #97D2EC;
+    padding: 1.5rem 1.5rem;
+    font-size: 1.5rem;
+    border: 1px solid #25316D;
+    border-radius: 5px;
+    color: whitesmoke;
+    margin: 5px 3px;
+    text-shadow: 1px 1px 2px #000000;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.projects--container button:active{
+    color: #FEF5AC;
+    box-shadow: inset 0 0 8px #FEF5AC;
 }
 
 .projects {
@@ -9,35 +28,47 @@
     justify-content: flex-start;
     align-items: center;
     height: auto;
-    border: 1px dashed purple;
+    border-radius: 10px;
+    background-color: #5F6F94;
+    padding: 2rem 3rem;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~INDIVIDUAL PROJECTS~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .project--container{
-    width: 100%;
+    width: 95%;
     max-height: 35%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-bottom: .5rem;
 }
 
 .project{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-radius: 5px;
+    background-color: #FEF5AC;
+    padding: 1rem 1.5rem;
     width: 100%;
-    height: auto;
-    margin-bottom: 1.5rem;
 }
 
 .project--info{
-    max-width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    width: 70%;
 }
 
 .project--info h3{
     font-size: 4rem;
+}
+
+.project--info p{
+    grid-row: span 2;
+    overflow-y: auto;
+    width: 95%;
+    height: 95%;
 }
 
 .toggle--container{
@@ -47,8 +78,50 @@
 .toggle {
     font-size: 3rem;
     transition: .15s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .toggle.active {
     transform: rotate(90deg);
 }
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PROJECT FORMS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`*/
+.Project--button{
+    cursor: pointer;
+    background-color: #97D2EC;
+    padding: 1.5rem 1.5rem;
+    font-size: 1.5rem;
+    border: 1px solid #25316D;
+    border-radius: 5px;
+    color: whitesmoke;
+    margin: 5px 3px;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.Project--form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 70%;
+    margin-top: 10px;
+    justify-items: end;
+}
+
+.Project--form label{
+    font-size: 2rem;
+}
+
+.Project--form input, .Project--form textarea{
+    padding: .5rem 1rem;
+    margin: .5rem 0;
+    grid-column: span 2;
+    width: 100%;
+}
+
+.Project--form button {
+    grid-column: 2;
+    width: 100%;
+    margin: 0;
+}
+

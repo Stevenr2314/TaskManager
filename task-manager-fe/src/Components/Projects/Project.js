@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {Modal, ModalContents, ModalDismissAsyncButton, ModalDismissButton, ModalOpenButton} from '../../Tools/Modal'
-import ProjectUpdateForm from "./UpdateForm";
+import UpdateProjectForm from "./UpdateProjectForm";
 import Tasks from "../Tasks/Tasks";
 
 const Project = props => {
@@ -28,7 +28,7 @@ const Project = props => {
                 <section className="project--info">
                     <h3>{project.name}</h3>
                     <p>{project.description}</p>
-                    <p>{project.created_at}</p>
+                    <h4>{project.created_at}</h4>
                 </section>
                 
                 
@@ -52,7 +52,7 @@ const Project = props => {
                             <button>Update</button>   
                         </ModalOpenButton>
                         <ModalContents title='Update project'>
-                            <ProjectUpdateForm setProjectsChange={setProjectsChange} project={project}/>
+                            <UpdateProjectForm setProjectsChange={setProjectsChange} project={project}/>
                         </ModalContents>
                     </Modal>
                 </div>

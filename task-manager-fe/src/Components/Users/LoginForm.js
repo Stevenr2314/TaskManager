@@ -2,6 +2,7 @@ import axios from "axios";
 import React, {useContext, useState} from "react";
 import { UserContext } from "../../App";
 import useInput from '../../Tools/useInput'
+import RegisterForm from "./RegisterForm";
 
 const LoginForm = () => {
     const username = useInput('')
@@ -22,17 +23,20 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-                <input type='text' name="username" placeholder="username" {...username}/>
-            </label>
-            <br />
-            <label htmlFor="password">
-                <input type='password' name="password" placeholder="password" {...password}/>
-            </label>
-            <br />
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit} className='login--form'>
+                <label htmlFor="username">
+                    <input type='text' name="username" placeholder="username" {...username}/>
+                </label>
+                <br />
+                <label htmlFor="password">
+                    <input type='password' name="password" placeholder="password" {...password}/>
+                </label>
+                <br />
+                <button type="submit">Login</button>
+            </form>
+            <RegisterForm />
+        </div>
     )
 }
 

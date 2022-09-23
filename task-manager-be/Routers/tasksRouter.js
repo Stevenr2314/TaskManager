@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Tasks = require('../Model/task_model')
 
-router.get('/:id', (req, res) => {
-    Tasks.getByProjectId(req.params.id)
+router.get('/:string/:id', (req, res) => {
+    Tasks.getBy(req.params.string ,req.params.id)
         .then(tasks => res.json(tasks))
 })
 
@@ -13,8 +13,8 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.delete('/', (req, res) => {
-    Tasks.deleteTask(req.body)
+router.delete('/:id', (req, res) => {
+    Tasks.deleteTask(req.params.id)
         .then(resp => res.status(200).json({message: 'success'}))
         .catch(err => console.log(err))
 })

@@ -1,17 +1,13 @@
 const db = require('../knex/db')
 
-function getAll() {
-    return db('users')
-}
-
 function getBy (string, value) {
     return db('users').where(`${string}`, value).first()
         .then(user => user )
 }
 
 function addUser(user) {
-    return db('users').insert(user)
-        .then(resp => console.log(resp))
+    return db('users').insert(user, ['username', 'email', 'created_at'])
+        .then(resp => resp)
 }
 
 function updateUser({form}) {
@@ -27,7 +23,6 @@ function deleteUser(user) {
 }
 
 module.exports = {
-    getAll,
     getBy,
     addUser,
     deleteUser,

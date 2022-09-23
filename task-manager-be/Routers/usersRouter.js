@@ -3,19 +3,7 @@ const { checkLogin } = require('../Middleware/Users/checkLogin')
 const router = express.Router()
 const Users = require('../Model/users_model')
 
-router.get('/', (req, res) => {
-    Users.getAll()
-      .then(users => res.json(users))
-      .catch(err => console.log(err))
-})
-
-router.get('/:id', (req, res) => {
-    Users.getById(req.body.id)
-        .then(user => res.json(user))
-        .catch(err => console.log(err))
-})
-
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
     Users.addUser(req.body)
         .then(users => res.status(201).json(users))
         .catch(err => console.log(err))

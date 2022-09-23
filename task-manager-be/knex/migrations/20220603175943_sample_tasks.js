@@ -28,6 +28,8 @@ exports.up = function(knex) {
     table.timestamp('created_at').defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.integer('project_id')
       .references('projects.id').onDelete('CASCADE')
+    table.integer('user_id')
+      .references('users.id').onDelete('CASCADE')
     table.boolean('completed').defaultTo(false)
   })
 };

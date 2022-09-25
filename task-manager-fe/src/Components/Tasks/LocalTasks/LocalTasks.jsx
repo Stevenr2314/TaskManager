@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../../../Styles/Tasks.css'
-import Checkbox from '../Checkbox'
 import CreateLocalTaskForm from './CreateLocalTaskForm'
 import {Modal, ModalContents, ModalDismissButton, ModalOpenButton} from '../../../Tools/Modal'
 import LocalTask from './LocalTask'
@@ -16,49 +15,44 @@ function LocalTasks() {
             setLocalTasks(parsedTasks)
           }
         } else {
-          console.log('creating new LocalTasks ')
           localStorage.setItem('localTasks', '[]')
         }
     }, [])
 
-    const handleCheckbox = (task) => {
-      task.completed = !task.completed
-    }
+    
 
     const handleSaveChanges = () => {
       localStorage.setItem('localTasks', JSON.stringify(localTasks))
     }
 
   return (
-    <div>
       <ul className="tasksContainer">
             {
                 localTasks && localTasks.length > 0 ?
                 localTasks.map((task, index) => {
                   if(task.completed === true) return null
                   return ( 
-                    <li key={index} className='taskWrapper'>
-                      <Checkbox onClick={() => handleCheckbox(task)}/>
-                      <LocalTask task={task}/>
-                    </li>
+                    <LocalTask key={index} task={task}/>
                   )})
                 :
-                <div> No tasks yet</div>
+                <div className="noTasks"> No tasks yet</div>
             }
+            <div>
+              <Modal>
+                <ModalOpenButton>
+                  <button>Create Task</button>
+                </ModalOpenButton>
+                <ModalContents title={'Create New Task'}>
+                    <CreateLocalTaskForm localTasks={localTasks} setLocalTasks={setLocalTasks}/>
+                    <ModalDismissButton>
+                      <button>Cancel</button>
+                    </ModalDismissButton>
+                </ModalContents>
+              </Modal>
+              <button onClick={()=>handleSaveChanges()}>Save Changes</button>
+            </div>
+            
       </ul>
-      <button onClick={()=>handleSaveChanges()}>Save Changes</button>
-      <Modal>
-        <ModalOpenButton>
-          <button>Create Task</button>
-        </ModalOpenButton>
-        <ModalContents title={'Create New Task'}>
-            <CreateLocalTaskForm localTasks={localTasks} setLocalTasks={setLocalTasks}/>
-            <ModalDismissButton>
-              <button>Cancel</button>
-            </ModalDismissButton>
-        </ModalContents>
-      </Modal>
-    </div>
   )
 }
 

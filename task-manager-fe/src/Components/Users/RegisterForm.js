@@ -10,17 +10,16 @@ function RegisterForm() {
     const email = useInput('')
     const {setUser} = useContext(UserContext)
 
-    const handleSubmit = event => {
-        event.preventDefault()
+    const handleSubmit = () => {
         const form = {
             username: username.value, 
             password: password.value,
             email: email.value
         }
-         return axios.post('http://localhost:5001/users/register', {data:{form}})
+         return axios.post('http://localhost:5001/users/register', {form})
             .then(res => {
-                setUser(res.data.user)
-                localStorage.setItem('user', JSON.stringify(res.data.user))
+                setUser(res.data[0])
+                localStorage.setItem('user', JSON.stringify(res.data[0]))
                 return 'success'})
             .catch(err => console.log(err))
     }
@@ -29,22 +28,16 @@ function RegisterForm() {
         <ModalOpenButton>
             <button className='register--button'>Register</button>
         </ModalOpenButton>
-        <ModalContents>
-            <form onSubmit={handleSubmit} className='register--form'>
-                <label htmlFor="email">
-                    <input type='text' name="email" placeholder="email" {...email}/>
-                </label>
-                <br />
-                <label htmlFor="username">
-                    <input type='text' name="username" placeholder="username" {...username}/>
-                </label>
-                <br />
-                <label htmlFor="password">
-                    <input type='password' name="password" placeholder="password" {...password}/>
-                </label>
-                <br />
+        <ModalContents title='Register an Account'>
+            <form onSubmit={e => e.preventDefault()} className='register--form'>
+                <label htmlFor="email">Email: </label>
+                <input type='text' name="email" {...email}/>
+                <label htmlFor="username">Username: </label>
+                <input type='text' name="username" {...username}/>
+                <label htmlFor="password">Password: </label>
+                <input type='password' name="password" {...password}/>
                 <ModalDismissAsyncButton>
-                    <button type="submit">Login</button>
+                    <button type="button" onClick={handleSubmit}>Register</button>
                 </ModalDismissAsyncButton>
             </form>
         </ModalContents>

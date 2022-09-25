@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 
 const Projects = () => {
-    const [projects, setProjects] = useState()
+    const [projects, setProjects] = useState([])
     const [projectsChange, setProjectsChange] = useState(false)
     const {user} = useContext(UserContext)
     const location = useLocation()

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
 import { UserContext } from "../App";
 import Projects from "../Components/Projects/Projects";
@@ -6,7 +6,7 @@ import LocalTasks from "../Components/Tasks/LocalTasks/LocalTasks";
 import Tasks from "../Components/Tasks/Tasks";
 import '../Styles/Home.css'
 
-const Home = props => {
+const Home = () => {
     const {user} = useContext(UserContext)
     return (
         <div className="home">

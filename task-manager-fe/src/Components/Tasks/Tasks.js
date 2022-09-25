@@ -3,7 +3,6 @@ import axios from "axios"
 import CreateTaskForm from "./CreateTaskForm"
 import Task from './Task'
 import '../../Styles/Tasks.css'
-import { useLocation } from "react-router-dom"
 
 const Tasks = props => {
     const [tasks, setTasks] = useState([])

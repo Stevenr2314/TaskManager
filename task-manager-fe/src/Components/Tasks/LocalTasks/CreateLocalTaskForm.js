@@ -26,16 +26,13 @@ const CreateLocalTaskForm = props => {
         console.log(props.localTasks)
     }, [])
     return(
-        <form onSubmit={e => e.preventDefault()}>
+        <form className="Task--form" onSubmit={e => e.preventDefault()}>
             <label>Title: </label>
             <input name='title' type="text" value={form.title} onChange={handleChange} />
-            <br />
-            <label>Description:</label>
-            <input name='description' type="text" value={form.description} onChange={handleChange} />
-            <br />
             <label>Due Date: </label>
             <input name='dueDate' type="text" value={form.dueDate} onChange={handleChange} />
-            <br />
+            <label>Description:</label>
+            <textarea name='description' type="text" value={form.description} onChange={handleChange} />
             <ModalDismissButton>
                 <button type="button" onClick={handleSubmit}>Submit</button>
             </ModalDismissButton>

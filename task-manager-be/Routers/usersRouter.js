@@ -4,7 +4,7 @@ const router = express.Router()
 const Users = require('../Model/users_model')
 
 router.post('/register', (req, res) => {
-    Users.addUser(req.body)
+    Users.addUser(req.body.form)
         .then(users => res.status(201).json(users))
         .catch(err => console.log(err))
 })

@@ -6,7 +6,7 @@ function getBy (string, value) {
 }
 
 function addUser(user) {
-    return db('users').insert(user, ['username', 'email', 'created_at'])
+    return db('users').insert(user, ['id', 'username', 'email', 'created_at'])
         .then(resp => resp)
 }
 

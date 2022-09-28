@@ -28,4 +28,10 @@ router.patch('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.put('/:id', (req, res) => {
+    Projects.toggleArchived(req.params.id)
+        .then(resp => res.status(200).json({message: 'success'}))
+        .catch(err => console.log(err))
+})
+
 module.exports = router

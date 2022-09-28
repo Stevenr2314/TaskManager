@@ -20,9 +20,18 @@ function deleteProject(id) {
         .then(resp => console.log(resp))
 }
 
+function toggleArchived(id) {
+    return db('projects').where('id', id).first()
+        .then(resp => {
+            const current = resp.archived
+            return db('projects').where('id', id).first().update({archived: !current})
+    })
+}
+
 module.exports = {
     getAllFromUserID,
     addProject,
     deleteProject,
-    updateProject
+    updateProject,
+    toggleArchived
 }

@@ -1,20 +1,22 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
+require('dotenv').config()
+
 module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgresql://postgres:Paperz421@localhost:5432/task_manager',
+    connection: process.env.DATABASE_PATH,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: './migrations'
+      directory: './knex/migrations'
     },
     seeds: {
-      directory: './seeds'
+      directory: './knex/seeds'
     }
   },
 };

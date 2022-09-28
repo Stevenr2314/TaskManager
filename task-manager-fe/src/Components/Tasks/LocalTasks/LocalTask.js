@@ -1,21 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Checkbox from '../Checkbox'
-import {Modal, ModalContents, ModalDismissAsyncButton, ModalDismissButton, ModalOpenButton} from '../../../Tools/Modal'
+import {Modal, ModalContents, ModalDismissButton, ModalOpenButton} from '../../../Tools/Modal'
+import UpdateLocalTaskForm from "./UpdateLocalTaskForm";
 
 const LocalTask = props => {
-    const {task} = props
+    const [task, setTask] = useState(props.task)
+    const [taskChanged, setTaskChanged] = useState(false)
+
+    useEffect(() => {
+        props.updateChanges(props.taskIndex, task)
+
+    }, [taskChanged])
 
     const handleCheckbox = (task) => {
-        task.completed = !task.completed
-    }
-
-    const handleDelete = id => {
-        return 
+        setTask({...task, 'completed': !task.completed})
+        setTaskChanged(true)
     }
 
     return (
         <li className="task--wrapper">
-            <Checkbox onClick={() => handleCheckbox(task)}/>
+            <Checkbox initialValue={task.completed} onClick={() => handleCheckbox(task)}/>
             <section className="task--info">
                <h3>{task.title}</h3>
                 <p>{task.description}</p>
@@ -27,9 +31,9 @@ const LocalTask = props => {
                         <button>Delete</button>
                     </ModalOpenButton>
                     <ModalContents title='Confirm Delete?'>
-                        <ModalDismissAsyncButton>
-                            <button onClick={() => handleDelete(task.id)}>Yes</button>
-                        </ModalDismissAsyncButton>
+                        <ModalDismissButton>
+                            <button onClick={() => props.handleDelete(props.taskIndex)}>Yes</button>
+                        </ModalDismissButton>
                         <ModalDismissButton>
                             <button>No</button>
                         </ModalDismissButton>
@@ -40,7 +44,7 @@ const LocalTask = props => {
                         <button>Update</button>   
                     </ModalOpenButton>
                     <ModalContents title='Update Task'>
-                        <p>LocalTaskUpdate</p>
+                        <UpdateLocalTaskForm task={task} setTask={setTask} taskChanged={taskChanged} setTaskChanged={setTaskChanged}/>
                         <ModalDismissButton>
                         <button type="button">Cancel</button>
                         </ModalDismissButton>

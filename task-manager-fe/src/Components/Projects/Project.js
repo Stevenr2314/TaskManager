@@ -3,6 +3,7 @@ import axios from "axios";
 import {Modal, ModalContents, ModalDismissAsyncButton, ModalDismissButton, ModalOpenButton} from '../../Tools/Modal'
 import UpdateProjectForm from "./UpdateProjectForm";
 import Tasks from "../Tasks/Tasks";
+import Checkbox from "../Tasks/Checkbox";
 
 const Project = props => {
     const {project, setProjectsChange} = props
@@ -16,6 +17,12 @@ const Project = props => {
             .catch(err => console.log(err))
     }
 
+    const handleCheckbox = () => {
+        axios.put(`http://localhost:5001/projects/${project.id}`)
+            .then(resp => setProjectsChange(true))
+            .catch(err => console.log(err))
+    }
+
     return (
         <li className="project--container">
             <div className="project">
@@ -24,6 +31,7 @@ const Project = props => {
                         <span>&#62;</span>
                     </div>
                 </div>
+                <Checkbox initialValue={project.archived} onClick={() => handleCheckbox()}/>
 
                 <section className="project--info">
                     <h3>{project.name}</h3>
